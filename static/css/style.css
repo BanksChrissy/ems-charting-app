@@ -1,0 +1,19 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 2em;
+}
+
+.toggle-container button {
+    margin: 5px;
+    padding: 10px 15px;
+    border: 1px solid #999;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #eee;
+}
+
+.toggle-container button.active {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
