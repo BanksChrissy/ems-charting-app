@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EMS Charting</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <h1>Adult Bradycardia</h1>
+    <div id="toggles" class="toggle-container"></div>
+    <button onclick="submitToggles()">Generate Narrative</button>
+    <pre id="narrative"></pre>
+
+    <script>
+        fetch("/pertinent-negatives/bradycardia")
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById("toggles");
+                data.forEach(item => {
+                    const btn = document.createElement("button");
+                    btn.textContent = item;
+                    btn.classList.add("toggle");
+                    btn.onclick = () => btn.classList.toggle("active");
+                    container.appendChild(btn);
+                });
+            });
+
+        function submitToggles() {
+            const active = Array.from(document.querySelectorAll(".toggle.active")).map(btn => btn.textContent);
+            fetch("/generate-narrative", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({toggles: active})
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("narrative").textContent = data.narrative;
+            });
+        }
+    </script>
+</body>
+</html>
+

@@ -5,24 +5,77 @@
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <h1>Adult Bradycardia</h1>
+    <h1 id="protocol-title">EMS Protocol Viewer</h1>
+
+    <label for="protocol-select">Select Protocol:</label>
+    <select id="protocol-select" onchange="loadToggles()">
+        <option value="adult---bradycardia">Adult - Bradycardia</option>
+        <option value="adult---general-adult-trauma-assessment">Adult - General Adult Trauma Assessment</option>
+        <option value="adult---abdominal-pain-flank-pain-nausea-&-vomiting">Adult - Abdominal Pain/Flank Pain, Nausea & Vomiting</option>
+        <option value="adult---behavioral-emergencies">Adult - Behavioral Emergencies</option>
+        <option value="adult---burns">Adult - Burns</option>
+        <option value="adult---cardiac-arrest-non-traumatic">Adult - Cardiac Arrest (Non-Traumatic)</option>
+        <option value="adult---chest-pain-non-traumatic-and-suspected-acute-coronary-syndrome">Adult - Chest Pain (Non-Traumatic) and Suspected Acute Coronary Syndrome</option>
+        <option value="adult---childbirth-labor">Adult - Childbirth/Labor</option>
+        <option value="adult---cold-related-illness">Adult - Cold Related Illness</option>
+        <option value="adult---epistaxis">Adult - Epistaxis</option>
+        <option value="adult---heat-related-illness">Adult - Heat-Related Illness</option>
+        <option value="adult---hyperkalemia-suspected">Adult - Hyperkalemia (Suspected)</option>
+        <option value="adult---obstetrical-emergency">Adult - Obstetrical Emergency</option>
+        <option value="adult---overdose-poisoning">Adult - Overdose/Poisoning</option>
+        <option value="adult---pain-management">Adult - Pain Management</option>
+        <option value="adult---pulmonary-edema-chf">Adult - Pulmonary Edema/CHF</option>
+        <option value="adult---respiratory-distress">Adult - Respiratory Distress</option>
+        <option value="adult---seizure">Adult - Seizure</option>
+        <option value="adult---sepsis">Adult - Sepsis</option>
+        <option value="adult---shock">Adult - Shock</option>
+        <option value="adult---smoke-inhalation">Adult - Smoke Inhalation</option>
+        <option value="adult---stemi-suspected">Adult - STEMI (Suspected)</option>
+        <option value="adult---stroke-cva">Adult - Stroke (CVA)</option>
+        <option value="adult---tachycardia-stable">Adult - Tachycardia/Stable</option>
+        <option value="adult---tachycardia-unstable">Adult - Tachycardia/Unstable</option>
+        <option value="adult---ventilation-management">Adult - Ventilation Management</option>
+        <option value="pediatric---general-pediatric-assessment">Pediatric - General Pediatric Assessment</option>
+        <option value="pediatric---general-pediatric-trauma-assessment">Pediatric - General Pediatric Trauma Assessment</option>
+        <option value="pediatric---abdominal-flank-pain-nausea-&-vomiting">Pediatric - Abdominal/Flank Pain, Nausea & Vomiting</option>
+        <option value="pediatric---allergic-reaction">Pediatric - Allergic Reaction</option>
+        <option value="pediatric---altered-mental-status">Pediatric - Altered Mental Status</option>
+        <option value="pediatric---behavioral-emergencies">Pediatric - Behavioral Emergencies</option>
+        <option value="pediatric---bradycardia">Pediatric - Bradycardia</option>
+        <option value="pediatric---burns">Pediatric - Burns</option>
+        <option value="pediatric---cardiac-arrest-non-traumatic">Pediatric - Cardiac Arrest (Non-Traumatic)</option>
+        <option value="pediatric---cold-related-illness">Pediatric - Cold Related Illness</option>
+        <option value="pediatric---epistaxis">Pediatric - Epistaxis</option>
+        <option value="pediatric---heat-related-illness">Pediatric - Heat Related Illness</option>
+        <option value="pediatric---neonatal-resuscitation">Pediatric - Neonatal Resuscitation</option>
+        <option value="pediatric---overdose-poisoning">Pediatric - Overdose/Poisoning</option>
+        <option value="pediatric---pain-management">Pediatric - Pain Management</option>
+    </select>
+
     <div id="toggles" class="toggle-container"></div>
     <button onclick="submitToggles()">Generate Narrative</button>
     <pre id="narrative"></pre>
 
     <script>
-        fetch("/pertinent-negatives/bradycardia")
-            .then(response => response.json())
-            .then(data => {
-                const container = document.getElementById("toggles");
-                data.forEach(item => {
-                    const btn = document.createElement("button");
-                    btn.textContent = item;
-                    btn.classList.add("toggle");
-                    btn.onclick = () => btn.classList.toggle("active");
-                    container.appendChild(btn);
+        function loadToggles() {
+            const selected = document.getElementById("protocol-select").value;
+            const title = document.getElementById("protocol-select").selectedOptions[0].text;
+            document.getElementById("protocol-title").textContent = title;
+
+            fetch("/pertinent-negatives/" + selected)
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById("toggles");
+                    container.innerHTML = ""; // Clear previous toggles
+                    data.forEach(item => {
+                        const btn = document.createElement("button");
+                        btn.textContent = item;
+                        btn.classList.add("toggle");
+                        btn.onclick = () => btn.classList.toggle("active");
+                        container.appendChild(btn);
+                    });
                 });
-            });
+        }
 
         function submitToggles() {
             const active = Array.from(document.querySelectorAll(".toggle.active")).map(btn => btn.textContent);
@@ -36,6 +89,8 @@
                 document.getElementById("narrative").textContent = data.narrative;
             });
         }
+
+        window.onload = loadToggles;
     </script>
 </body>
 </html>
