@@ -2,13 +2,19 @@ body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     padding: 1rem;
     margin: 0;
-    background-color: #f7f7f7;
+    background-color: #f4f6f8;
     color: #333;
 }
 
 h1 {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
+    position: sticky;
+    top: 0;
+    background-color: #f4f6f8;
+    padding: 0.5rem 0;
+    z-index: 10;
+    border-bottom: 1px solid #ddd;
 }
 
 label {
@@ -23,6 +29,20 @@ select {
     padding: 0.5rem;
     font-size: 1rem;
     margin-bottom: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.toggle-header {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.toggle-count {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.5rem;
 }
 
 .toggle-container {
@@ -33,27 +53,32 @@ select {
 }
 
 .toggle-container button {
-    flex: 1 1 48%;
-    min-width: 140px;
-    padding: 0.75rem 1rem;
+    flex: 1 1 45%;
+    min-width: 120px;
+    padding: 0.6rem 1rem;
     font-size: 0.95rem;
     border: 1px solid #ccc;
-    border-radius: 8px;
+    border-radius: 20px;
     background-color: #fff;
-    color: #333; 
+    color: #333;
     cursor: pointer;
     text-align: center;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease-in-out;
+}
+
+.toggle-container button:hover {
+    background-color: #f0f0f0;
 }
 
 .toggle-container button.active {
     background-color: #007bff;
     color: white;
     font-weight: bold;
+    transform: scale(1.03);
     border-color: #007bff;
 }
 
-button {
+button.submit-btn {
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
     background-color: #28a745;
@@ -63,16 +88,21 @@ button {
     cursor: pointer;
     margin-top: 1rem;
     display: block;
+    width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-button:hover {
+button.submit-btn:hover {
     background-color: #218838;
 }
 
 pre {
-    background-color: #eee;
+    background-color: #fff;
     padding: 1rem;
     border-radius: 5px;
+    border: 1px solid #ddd;
     white-space: pre-wrap;
     word-wrap: break-word;
     font-size: 0.9rem;
