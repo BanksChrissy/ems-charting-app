@@ -40,6 +40,7 @@ select {
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #fff;
+    color: #333; 
     cursor: pointer;
     text-align: center;
     transition: background-color 0.2s ease;
