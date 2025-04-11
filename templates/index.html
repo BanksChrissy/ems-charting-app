@@ -9,6 +9,7 @@
 
     <label for="protocol-select">Select Protocol:</label>
     <select id="protocol-select" onchange="loadToggles()">
+        <!-- Combined options from both files -->
         <option value="adult---bradycardia">Adult - Bradycardia</option>
         <option value="adult---general-adult-trauma-assessment">Adult - General Adult Trauma Assessment</option>
         <option value="adult---abdominal-pain-flank-pain-nausea-&-vomiting">Adult - Abdominal Pain/Flank Pain, Nausea & Vomiting</option>
@@ -52,8 +53,9 @@
         <option value="pediatric---pain-management">Pediatric - Pain Management</option>
     </select>
 
+    <div class="toggle-count" id="toggle-count">0 selected</div>
     <div id="toggles" class="toggle-container"></div>
-    <button onclick="submitToggles()">Generate Narrative</button>
+    <button class="submit-btn" onclick="submitToggles()">Generate Narrative</button>
     <pre id="narrative"></pre>
 
     <script>
@@ -66,15 +68,24 @@
                 .then(response => response.json())
                 .then(data => {
                     const container = document.getElementById("toggles");
-                    container.innerHTML = ""; // Clear previous toggles
+                    container.innerHTML = "";
                     data.forEach(item => {
                         const btn = document.createElement("button");
                         btn.textContent = item;
                         btn.classList.add("toggle");
-                        btn.onclick = () => btn.classList.toggle("active");
+                        btn.onclick = () => {
+                            btn.classList.toggle("active");
+                            updateToggleCount();
+                        };
                         container.appendChild(btn);
                     });
+                    updateToggleCount();
                 });
+        }
+
+        function updateToggleCount() {
+            const active = document.querySelectorAll(".toggle.active").length;
+            document.getElementById("toggle-count").textContent = active + " selected";
         }
 
         function submitToggles() {
