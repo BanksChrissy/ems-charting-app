@@ -206,3 +206,30 @@ pre {
         font-size: 1.25rem;
     }
 }
+
+
+.toggle {
+    flex: 1 1 45%;
+    min-width: 120px;
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+    border: 1px solid var(--toggle-border);
+    border-radius: 20px;
+    background-color: var(--toggle-bg);
+    color: var(--toggle-text);
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.toggle:hover {
+    background-color: color-mix(in srgb, var(--toggle-bg) 90%, var(--text-color));
+}
+
+.toggle.active {
+    background-color: var(--toggle-active-bg);
+    color: var(--toggle-active-text);
+    font-weight: bold;
+    transform: scale(1.03);
+    border-color: var(--toggle-active-bg);
+}
