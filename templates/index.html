@@ -12,8 +12,8 @@
         </div>
         <h1 id="protocol-title">EMS Protocol Viewer</h1>
 
-    <label for="protocol-select">Select Protocol:</label>
-    <select id="protocol-select" onchange="loadToggles()">
+    <label for="protocol-select">Select Protocol(s):</label>
+    <select id="protocol-select" multiple size="6" onchange="loadToggles()">
         <!-- Combined options from both files -->
         <option value="adult---bradycardia">Adult - Bradycardia</option>
         <option value="adult---general-adult-trauma-assessment">Adult - General Adult Trauma Assessment</option>
@@ -64,29 +64,47 @@
     <pre id="narrative"></pre>
 
    <script>
-    function loadToggles() {
-        const selected = document.getElementById("protocol-select").value;
-        const title = document.getElementById("protocol-select").selectedOptions[0].text;
-        document.getElementById("protocol-title").textContent = title;
+function loadToggles() {
+    const selectedOptions = Array.from(document.getElementById("protocol-select").selectedOptions);
+    const selected = selectedOptions.map(option => option.value);
+    const title = selectedOptions.map(option => option.text).join(" + ");
+    document.getElementById("protocol-title").textContent = title;
 
-        fetch("/pertinent-negatives/" + selected)
-            .then(response => response.json())
-            .then(data => {
-                const container = document.getElementById("toggles");
-                container.innerHTML = "";
-                data.forEach(item => {
-                    const btn = document.createElement("button");
-                    btn.textContent = item;
-                    btn.classList.add("toggle");
-                    btn.onclick = () => {
-                        btn.classList.toggle("active");
-                        updateToggleCount();
-                    };
-                    container.appendChild(btn);
-                });
-                updateToggleCount();
+    fetch("/pertinent-negatives", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ protocols: selected })
+    })
+    .then(response => response.json())
+    .then(data => {
+        const container = document.getElementById("toggles");
+        container.innerHTML = ""; // Clear previous toggles
+
+        Object.entries(data).forEach(([protocol, toggles]) => {
+            const groupTitle = document.createElement("h3");
+            groupTitle.textContent = protocol.replace(/-/g, " ");
+            container.appendChild(groupTitle);
+
+            const groupDiv = document.createElement("div");
+            groupDiv.classList.add("toggle-container");
+
+            toggles.forEach(item => {
+                const btn = document.createElement("button");
+                btn.textContent = item;
+                btn.classList.add("toggle");
+                btn.onclick = () => {
+                    btn.classList.toggle("active");
+                    updateToggleCount();
+                };
+                groupDiv.appendChild(btn);
             });
-    }
+
+            container.appendChild(groupDiv);
+        });
+
+        updateToggleCount();
+    });
+}
 
     function updateToggleCount() {
         const active = document.querySelectorAll(".toggle.active").length;
