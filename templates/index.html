@@ -82,7 +82,10 @@ function loadToggles() {
 
         Object.entries(data).forEach(([protocol, toggles]) => {
             const groupTitle = document.createElement("h3");
-            groupTitle.textContent = protocol.replace(/-/g, " ");
+            groupTitle.textContent = protocol
+              .replace(/---/g, " - ")
+              .replace(/-/g, " ")
+              .replace(/\b\w/g, c => c.toUpperCase()); // capitalize first letter of each word
             container.appendChild(groupTitle);
 
             const groupDiv = document.createElement("div");
