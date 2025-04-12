@@ -12,14 +12,36 @@
         </div>
         <h1 id="protocol-title">EMS Protocol Viewer</h1>
 
+<div class="tabs">
+  <button class="tab-button active" data-tab="assessment">Assessment</button>
+  <button class="tab-button" data-tab="pmh">Past Medical History</button>
+  <button class="tab-button" data-tab="interventions">Interventions</button>
+  <button class="tab-button" data-tab="disposition">Disposition</button>
+</div>
+
+<div id="tab-content">
+  <div id="assessment" class="tab-section active">
     <label>Select Protocol(s):</label>
     <div id="protocol-buttons" class="toggle-container" style="margin-bottom: 1rem;"></div>
-        
-
     <div class="toggle-count" id="toggle-count">0 selected</div>
     <div id="toggles" class="toggle-container"></div>
-    <button class="submit-btn" onclick="submitToggles()">Generate Narrative</button>
-    <pre id="narrative"></pre>
+  </div>
+
+  <div id="pmh" class="tab-section" style="display: none;">
+    <p>[Placeholder for PMH toggles or checkboxes]</p>
+  </div>
+
+  <div id="interventions" class="tab-section" style="display: none;">
+    <p>[Placeholder for Interventions toggles or inputs]</p>
+  </div>
+
+  <div id="disposition" class="tab-section" style="display: none;">
+    <p>[Placeholder for Disposition checkboxes or summary field]</p>
+  </div>
+</div>
+
+<button class="submit-btn" onclick="submitToggles()">Generate Narrative</button>
+<pre id="narrative"></pre>
 
    <script>
 
@@ -66,6 +88,18 @@ const protocols = [
   { key: "pediatric---overdose-poisoning", label: "Pediatric - Overdose/Poisoning" },
   { key: "pediatric---pain-management", label: "Pediatric - Pain Management" }
 ];
+
+document.querySelectorAll(".tab-button").forEach(button => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
+    document.querySelectorAll(".tab-section").forEach(section => section.style.display = "none");
+
+    button.classList.add("active");
+    const tabId = button.dataset.tab;
+    document.getElementById(tabId).style.display = "block";
+  });
+});
+
 
 function buildProtocolButtons() {
   const container = document.getElementById("protocol-buttons");
