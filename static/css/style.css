@@ -28,6 +28,13 @@ body.dark {
     --header-bg: #1a1a1a;
 }
 
+/* Layout container for centering and max-width */
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
 body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     padding: 1rem;
@@ -157,20 +164,45 @@ pre {
     transition: all 0.2s ease;
 }
 
+/* Responsive Design Updates */
+/* Larger screens (desktops) */
+@media screen and (min-width: 1025px) {
+    body {
+        font-size: 16px;
+    }
+    .toggle-container button {
+        font-size: 1rem;
+    }
+}
+
+/* Medium screens (tablets) */
+@media screen and (max-width: 1024px) and (min-width: 601px) {
+    body {
+        font-size: 15px;
+    }
+    .toggle-container button {
+        flex: 1 1 48%;
+        font-size: 0.95rem;
+    }
+}
+
+/* Small screens (phones) */
 @media screen and (max-width: 600px) {
     .toggle-container button {
         flex: 1 1 100%;
+        font-size: 1rem;
     }
 
-    h1 {
-        font-size: 1.25rem;
+    .submit-btn {
+        width: 100%;
+        font-size: 1rem;
     }
 
     select {
         font-size: 1rem;
     }
 
-    button {
-        font-size: 1rem;
+    h1 {
+        font-size: 1.25rem;
     }
 }
