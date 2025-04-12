@@ -170,7 +170,9 @@ pre {
     body {
         font-size: 16px;
     }
+
     .toggle-container button {
+        flex: 1 1 48%; /* same as tablet layout */
         font-size: 1rem;
     }
 }
