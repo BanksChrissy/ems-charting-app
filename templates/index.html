@@ -14,49 +14,7 @@
 
     <label>Select Protocol(s):</label>
     <div id="protocol-buttons" class="toggle-container" style="margin-bottom: 1rem;"></div>
-        <!-- Combined options from both files -->
-        <option value="adult---bradycardia">Adult - Bradycardia</option>
-        <option value="adult---general-adult-trauma-assessment">Adult - General Adult Trauma Assessment</option>
-        <option value="adult---abdominal-pain-flank-pain-nausea-vomiting">Adult - Abdominal/Flank Pain, Nausea & Vomiting</option>
-        <option value="adult---behavioral-emergencies">Adult - Behavioral Emergencies</option>
-        <option value="adult---burns">Adult - Burns</option>
-        <option value="adult---cardiac-arrest-non-traumatic">Adult - Cardiac Arrest (Non-Traumatic)</option>
-        <option value="adult---chest-pain-non-traumatic-and-suspected-acute-coronary-syndrome">Adult - Chest Pain (Non-Traumatic) and Suspected Acute Coronary Syndrome</option>
-        <option value="adult---childbirth-labor">Adult - Childbirth/Labor</option>
-        <option value="adult---cold-related-illness">Adult - Cold Related Illness</option>
-        <option value="adult---epistaxis">Adult - Epistaxis</option>
-        <option value="adult---heat-related-illness">Adult - Heat-Related Illness</option>
-        <option value="adult---hyperkalemia-suspected">Adult - Hyperkalemia (Suspected)</option>
-        <option value="adult---obstetrical-emergency">Adult - Obstetrical Emergency</option>
-        <option value="adult---overdose-poisoning">Adult - Overdose/Poisoning</option>
-        <option value="adult---pain-management">Adult - Pain Management</option>
-        <option value="adult---pulmonary-edema-chf">Adult - Pulmonary Edema/CHF</option>
-        <option value="adult---respiratory-distress">Adult - Respiratory Distress</option>
-        <option value="adult---seizure">Adult - Seizure</option>
-        <option value="adult---sepsis">Adult - Sepsis</option>
-        <option value="adult---shock">Adult - Shock</option>
-        <option value="adult---smoke-inhalation">Adult - Smoke Inhalation</option>
-        <option value="adult---stemi-suspected">Adult - STEMI (Suspected)</option>
-        <option value="adult---stroke-cva">Adult - Stroke (CVA)</option>
-        <option value="adult---tachycardia-stable">Adult - Tachycardia/Stable</option>
-        <option value="adult---tachycardia-unstable">Adult - Tachycardia/Unstable</option>
-        <option value="adult---ventilation-management">Adult - Ventilation Management</option>
-        <option value="pediatric---general-pediatric-assessment">Pediatric - General Pediatric Assessment</option>
-        <option value="pediatric---general-pediatric-trauma-assessment">Pediatric - General Pediatric Trauma Assessment</option>
-        <option value="pediatric---abdominal-flank-pain-nausea-vomiting">Pediatric - Abdominal/Flank Pain, Nausea & Vomiting</option>
-        <option value="pediatric---allergic-reaction">Pediatric - Allergic Reaction</option>
-        <option value="pediatric---altered-mental-status">Pediatric - Altered Mental Status</option>
-        <option value="pediatric---behavioral-emergencies">Pediatric - Behavioral Emergencies</option>
-        <option value="pediatric---bradycardia">Pediatric - Bradycardia</option>
-        <option value="pediatric---burns">Pediatric - Burns</option>
-        <option value="pediatric---cardiac-arrest-non-traumatic">Pediatric - Cardiac Arrest (Non-Traumatic)</option>
-        <option value="pediatric---cold-related-illness">Pediatric - Cold Related Illness</option>
-        <option value="pediatric---epistaxis">Pediatric - Epistaxis</option>
-        <option value="pediatric---heat-related-illness">Pediatric - Heat Related Illness</option>
-        <option value="pediatric---neonatal-resuscitation">Pediatric - Neonatal Resuscitation</option>
-        <option value="pediatric---overdose-poisoning">Pediatric - Overdose/Poisoning</option>
-        <option value="pediatric---pain-management">Pediatric - Pain Management</option>
-    </select>
+        
 
     <div class="toggle-count" id="toggle-count">0 selected</div>
     <div id="toggles" class="toggle-container"></div>
@@ -64,6 +22,68 @@
     <pre id="narrative"></pre>
 
    <script>
+
+const protocols = [
+  { key: "adult---bradycardia", label: "Adult - Bradycardia" },
+  { key: "adult---general-adult-trauma-assessment", label: "Adult - General Adult Trauma Assessment" },
+  { key: "adult---abdominal-pain-flank-pain-nausea-vomiting", label: "Adult - Abdominal/Flank Pain, Nausea & Vomiting" },
+  { key: "adult---behavioral-emergencies", label: "Adult - Behavioral Emergencies" },
+  { key: "adult---burns", label: "Adult - Burns" },
+  { key: "adult---cardiac-arrest-non-traumatic", label: "Adult - Cardiac Arrest (Non-Traumatic)" },
+  { key: "adult---chest-pain-non-traumatic-and-suspected-acute-coronary-syndrome", label: "Adult - Chest Pain (Non-Traumatic) and Suspected Acute Coronary Syndrome" },
+  { key: "adult---childbirth-labor", label: "Adult - Childbirth/Labor" },
+  { key: "adult---cold-related-illness", label: "Adult - Cold Related Illness" },
+  { key: "adult---epistaxis", label: "Adult - Epistaxis" },
+  { key: "adult---heat-related-illness", label: "Adult - Heat-Related Illness" },
+  { key: "adult---hyperkalemia-suspected", label: "Adult - Hyperkalemia (Suspected)" },
+  { key: "adult---obstetrical-emergency", label: "Adult - Obstetrical Emergency" },
+  { key: "adult---overdose-poisoning", label: "Adult - Overdose/Poisoning" },
+  { key: "adult---pain-management", label: "Adult - Pain Management" },
+  { key: "adult---pulmonary-edema-chf", label: "Adult - Pulmonary Edema/CHF" },
+  { key: "adult---respiratory-distress", label: "Adult - Respiratory Distress" },
+  { key: "adult---seizure", label: "Adult - Seizure" },
+  { key: "adult---sepsis", label: "Adult - Sepsis" },
+  { key: "adult---shock", label: "Adult - Shock" },
+  { key: "adult---smoke-inhalation", label: "Adult - Smoke Inhalation" },
+  { key: "adult---stemi-suspected", label: "Adult - STEMI (Suspected)" },
+  { key: "adult---stroke-cva", label: "Adult - Stroke (CVA)" },
+  { key: "adult---tachycardia-stable", label: "Adult - Tachycardia/Stable" },
+  { key: "adult---tachycardia-unstable", label: "Adult - Tachycardia/Unstable" },
+  { key: "adult---ventilation-management", label: "Adult - Ventilation Management" },
+  { key: "pediatric---general-pediatric-assessment", label: "Pediatric - General Pediatric Assessment" },
+  { key: "pediatric---general-pediatric-trauma-assessment", label: "Pediatric - General Pediatric Trauma Assessment" },
+  { key: "pediatric---abdominal-flank-pain-nausea-vomiting", label: "Pediatric - Abdominal/Flank Pain, Nausea & Vomiting" },
+  { key: "pediatric---allergic-reaction", label: "Pediatric - Allergic Reaction" },
+  { key: "pediatric---altered-mental-status", label: "Pediatric - Altered Mental Status" },
+  { key: "pediatric---behavioral-emergencies", label: "Pediatric - Behavioral Emergencies" },
+  { key: "pediatric---bradycardia", label: "Pediatric - Bradycardia" },
+  { key: "pediatric---burns", label: "Pediatric - Burns" },
+  { key: "pediatric---cardiac-arrest-non-traumatic", label: "Pediatric - Cardiac Arrest (Non-Traumatic)" },
+  { key: "pediatric---cold-related-illness", label: "Pediatric - Cold Related Illness" },
+  { key: "pediatric---epistaxis", label: "Pediatric - Epistaxis" },
+  { key: "pediatric---heat-related-illness", label: "Pediatric - Heat Related Illness" },
+  { key: "pediatric---neonatal-resuscitation", label: "Pediatric - Neonatal Resuscitation" },
+  { key: "pediatric---overdose-poisoning", label: "Pediatric - Overdose/Poisoning" },
+  { key: "pediatric---pain-management", label: "Pediatric - Pain Management" }
+];
+
+function buildProtocolButtons() {
+  const container = document.getElementById("protocol-buttons");
+  container.innerHTML = "";
+
+  protocols.forEach(({ key, label }) => {
+    const btn = document.createElement("button");
+    btn.classList.add("toggle");
+    btn.textContent = label;
+    btn.dataset.protocol = key;
+    btn.onclick = () => {
+      btn.classList.toggle("active");
+      loadToggles();
+    };
+    container.appendChild(btn);
+  });
+}
+       
 function loadToggles() {
   const selectedButtons = document.querySelectorAll("#protocol-buttons .toggle.active");
   const selected = Array.from(selectedButtons).map(btn => btn.dataset.protocol);
@@ -141,7 +161,10 @@ function loadToggles() {
         }
     })();
 
-    window.onload = loadToggles;
+    window.onload = () => {
+  buildProtocolButtons();
+  loadToggles();
+};
 </script>
 </body>
 </html>
