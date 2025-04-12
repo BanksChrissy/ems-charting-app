@@ -448,8 +448,7 @@ def get_negatives():
         if protocol in all_negatives:
             response[protocol] = all_negatives[protocol]
 
-    return jsonify(negatives.get(protocol.lower(), []))
-
+    return jsonify(response)
 # Placeholder for narrative generation
 @app.route("/generate-narrative", methods=["POST"])
 def generate_narrative():
