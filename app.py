@@ -445,8 +445,8 @@ def get_negatives():
 }
     response = {}
     for protocol in requested:
-        if protocol in all_negatives:
-            response[protocol] = all_negatives[protocol]
+        if protocol in negatives:
+            response[protocol] = negatives[protocol]
 
     return jsonify(response)
 # Placeholder for narrative generation
