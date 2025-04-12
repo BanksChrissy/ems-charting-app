@@ -295,14 +295,16 @@ pre {
 .site-header {
     width: 100%;
     background-color: var(--header-bg);
-    border-bottom: 2px solid var(--toggle-border);
+    border: 1px solid var(--toggle-border);
+    border-radius: 10px;
+    padding: 0.75rem;
     margin-bottom: 1rem;
-    padding: 0.5rem 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .site-title {
     text-align: center;
-    font-size: 2rem;
-    font-weight: bold;
+    font-size: 1.5rem;
+    font-weight: 700;
     color: var(--text-color);
 }
