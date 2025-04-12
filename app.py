@@ -9,8 +9,9 @@ def index():
     return render_template("index.html")
 
 # Placeholder: Load pertinent negatives (would normally come from DB)
-@app.route("/pertinent-negatives/<protocol>")
-def get_negatives(protocol):
+@app.route("/pertinent-negatives", methods=["POST"])
+def get_negatives():
+    requested = request.json.get("protocols", [])
     negatives = {
     "adult---bradycardia": [
         "No altered mental status",
@@ -442,6 +443,11 @@ def get_negatives(protocol):
         "No allergy to medications"
     ]
 }
+    response = {}
+    for protocol in requested:
+        if protocol in all_negatives:
+            response[protocol] = all_negatives[protocol]
+
     return jsonify(negatives.get(protocol.lower(), []))
 
 # Placeholder for narrative generation
