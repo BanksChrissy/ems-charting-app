@@ -303,7 +303,7 @@ pre {
 /* Adjust banner appearance only for mobile and extra small screens */
 @media screen and (max-width: 480px) {
   .banner-img {
-    max-height: 140px;
+    max-height: 100px;
     object-fit: cover;
     border-radius: 0;
     margin: 0;
