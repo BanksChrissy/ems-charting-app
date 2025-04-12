@@ -136,17 +136,20 @@ function loadToggles() {
     }
 
     function submitToggles() {
-        const active = Array.from(document.querySelectorAll(".toggle.active")).map(btn => btn.textContent);
-        fetch("/generate-narrative", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({toggles: active})
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("narrative").textContent = data.narrative;
-        });
-    }
+  // Only collect toggles inside the #toggles section (not protocol buttons)
+  const active = Array.from(document.querySelectorAll("#toggles .toggle.active"))
+    .map(btn => btn.textContent);
+
+  fetch("/generate-narrative", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ toggles: active })
+  })
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById("narrative").textContent = data.narrative;
+  });
+}
 
     function toggleTheme() {
         document.body.classList.toggle("dark");
