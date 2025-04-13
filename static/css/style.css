@@ -314,19 +314,21 @@ pre {
   }
 }
 
-.text-input {
+.chart-input,
+input.chart-input,
+textarea.chart-input {
   width: 100%;
-  min-height: 2.5rem;
-  padding: 0.6rem 0.8rem;
-  font-size: 1rem;
+  padding: 1rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
   border: 1px solid var(--toggle-border);
-  border-radius: 6px;
   background-color: var(--card-bg);
   color: var(--text-color);
+  margin-bottom: 1rem;
   box-sizing: border-box;
-  resize: vertical;
 }
 
-textarea.text-input {
+textarea.chart-input {
   min-height: 120px;
+  resize: vertical;
 }
