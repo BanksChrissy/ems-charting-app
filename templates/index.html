@@ -223,9 +223,21 @@ function loadToggles() {
     }
 
     function submitToggles() {
-  // Gather toggle selections from Assessment tab
-  const toggleSelections = Array.from(document.querySelectorAll("#toggles .toggle.active"))
-    .map(btn => btn.textContent);
+  const toggles = Array.from(document.querySelectorAll("#toggles .toggle")).map(btn => ({
+    text: btn.textContent,
+    state: btn.dataset.state
+  }));
+
+  fetch("/generate-narrative", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ toggles: toggles })
+  })
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById("narrative").textContent = data.narrative;
+  });
+}
 
   // Gather CHART inputs from other tabs
   const chief = document.getElementById("chief-input")?.value.trim();
