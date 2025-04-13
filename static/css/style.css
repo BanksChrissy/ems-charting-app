@@ -313,3 +313,20 @@ pre {
     padding-top: 0.5rem;
   }
 }
+
+.text-input {
+  width: 100%;
+  min-height: 2.5rem;
+  padding: 0.6rem 0.8rem;
+  font-size: 1rem;
+  border: 1px solid var(--toggle-border);
+  border-radius: 6px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+textarea.text-input {
+  min-height: 120px;
+}
