@@ -148,6 +148,19 @@ function buildProtocolButtons() {
   protocols.forEach(({ key, label }) => {
     const btn = document.createElement("button");
     btn.classList.add("toggle");
+btn.dataset.state = "no"; // Default to 'no'
+btn.onclick = () => {
+  if (btn.dataset.state === "no") {
+    btn.dataset.state = "yes";
+    btn.classList.remove("negative");
+    btn.classList.add("positive");
+  } else {
+    btn.dataset.state = "no";
+    btn.classList.remove("positive");
+    btn.classList.add("negative");
+  }
+  updateToggleCount();
+};
     btn.textContent = label;
     btn.dataset.protocol = key;
     btn.onclick = () => {
