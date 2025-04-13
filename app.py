@@ -12,6 +12,15 @@ with open("pertinent_negatives.json") as f:
 def index():
     return render_template("index.html")
 
+@app.route("/pertinent-negatives", methods=["POST"])
+def get_negatives():
+    requested = request.json.get("protocols", [])
+    response = {}
+    for protocol in requested:
+        if protocol in all_negatives:
+            response[protocol] = all_negatives[protocol]
+    return jsonify(response)
+
 @app.route("/generate-narrative", methods=["POST"])
 def generate_narrative():
     toggles = request.json.get("toggles", [])
