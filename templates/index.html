@@ -151,7 +151,7 @@ function loadToggles() {
   const selectedButtons = document.querySelectorAll("#protocol-buttons .toggle.active");
   const selected = Array.from(selectedButtons).map(btn => btn.dataset.protocol);
   const title = Array.from(selectedButtons).map(btn => btn.textContent).join(" + ");
-  document.getElementById("protocol-title").textContent = title;
+  // document.getElementById("protocol-title").textContent = title;
 
   fetch("/pertinent-negatives", {
     method: "POST",
