@@ -28,12 +28,20 @@
 
 <div id="tab-content">
   <div id="chief" class="tab-section active">
-    <p>[Placeholder for Chief Complaint input or toggles]</p>
-  </div>
+  <label for="chief-input">Chief Complaint:</label>
+  <input type="text" id="chief-input" placeholder="e.g., Chest Pain" class="text-input" />
+</div>
 
-  <div id="history" class="tab-section" style="display: none;">
-    <p>[Placeholder for Past Medical History, Meds, Allergies, etc.]</p>
-  </div>
+ <div id="history" class="tab-section" style="display: none;">
+  <label for="pmh-input">Past Medical History:</label>
+  <textarea id="pmh-input" class="text-input" placeholder="e.g., Hypertension, Diabetes"></textarea>
+
+  <label for="meds-input">Medications:</label>
+  <textarea id="meds-input" class="text-input" placeholder="e.g., Metformin, Lisinopril"></textarea>
+
+  <label for="allergies-input">Allergies:</label>
+  <textarea id="allergies-input" class="text-input" placeholder="e.g., NKDA or Penicillin"></textarea>
+</div>
 
   <div id="assessment" class="tab-section" style="display: none;">
     <label>Select Protocol(s):</label>
@@ -43,12 +51,15 @@
   </div>
 
   <div id="interventions" class="tab-section" style="display: none;">
-    <p>[Placeholder for Interventions toggles or inputs]</p>
-  </div>
+  <label for="interventions-input">Interventions/Medications:</label>
+  <textarea id="interventions-input" class="text-input" placeholder="e.g., Albuterol given with improvement"></textarea>
+</div>
 
-  <div id="disposition" class="tab-section" style="display: none;">
-    <p>[Placeholder for Disposition notes, handoff, transport details]</p>
-  </div>
+  <<div id="disposition" class="tab-section" style="display: none;">
+  <label for="disposition-input">Transport/Disposition:</label>
+  <textarea id="disposition-input" class="text-input" placeholder="e.g., Transported code 2 to Sunrise, care transferred to RN Smith"></textarea>
+</div>
+    
 </div>
   <div id="pmh" class="tab-section" style="display: none;">
     <p>[Placeholder for PMH toggles or checkboxes]</p>
