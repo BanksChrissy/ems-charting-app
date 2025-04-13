@@ -19,20 +19,37 @@
   <h1 id="protocol-title">EMS Protocol Viewer</h1>
 
 <div class="tabs">
-  <button class="tab-button active" data-tab="assessment">Assessment</button>
-  <button class="tab-button" data-tab="pmh">Past Medical History</button>
+  <button class="tab-button active" data-tab="chief">Chief Complaint</button>
+  <button class="tab-button" data-tab="history">History</button>
+  <button class="tab-button" data-tab="assessment">Assessment</button>
   <button class="tab-button" data-tab="interventions">Interventions</button>
-  <button class="tab-button" data-tab="disposition">Disposition</button>
+  <button class="tab-button" data-tab="disposition">Transport / Disposition</button>
 </div>
 
 <div id="tab-content">
-  <div id="assessment" class="tab-section active">
+  <div id="chief" class="tab-section active">
+    <p>[Placeholder for Chief Complaint input or toggles]</p>
+  </div>
+
+  <div id="history" class="tab-section" style="display: none;">
+    <p>[Placeholder for Past Medical History, Meds, Allergies, etc.]</p>
+  </div>
+
+  <div id="assessment" class="tab-section" style="display: none;">
     <label>Select Protocol(s):</label>
     <div id="protocol-buttons" class="toggle-container" style="margin-bottom: 1rem;"></div>
     <div class="toggle-count" id="toggle-count">0 selected</div>
     <div id="toggles" class="toggle-container"></div>
   </div>
 
+  <div id="interventions" class="tab-section" style="display: none;">
+    <p>[Placeholder for Interventions toggles or inputs]</p>
+  </div>
+
+  <div id="disposition" class="tab-section" style="display: none;">
+    <p>[Placeholder for Disposition notes, handoff, transport details]</p>
+  </div>
+</div>
   <div id="pmh" class="tab-section" style="display: none;">
     <p>[Placeholder for PMH toggles or checkboxes]</p>
   </div>
