@@ -210,19 +210,39 @@ function loadToggles() {
     }
 
     function submitToggles() {
-  // Only collect toggles inside the #toggles section (not protocol buttons)
-  const active = Array.from(document.querySelectorAll("#toggles .toggle.active"))
+  // Gather toggle selections from Assessment tab
+  const toggleSelections = Array.from(document.querySelectorAll("#toggles .toggle.active"))
     .map(btn => btn.textContent);
 
+  // Gather CHART inputs from other tabs
+  const chief = document.getElementById("chief-input")?.value.trim();
+  const pmh = document.getElementById("pmh-input")?.value.trim();
+  const meds = document.getElementById("meds-input")?.value.trim();
+  const allergies = document.getElementById("allergies-input")?.value.trim();
+  const interventions = document.getElementById("interventions-input")?.value.trim();
+  const disposition = document.getElementById("disposition-input")?.value.trim();
+
+  // Assemble all toggles and inputs into a single array
+  const allNarrativeData = [
+    ...(chief ? [`Chief Complaint: ${chief}`] : []),
+    ...(pmh ? [`History: PMH - ${pmh}`] : []),
+    ...(meds ? [`History: Medications - ${meds}`] : []),
+    ...(allergies ? [`History: Allergies - ${allergies}`] : []),
+    ...toggleSelections,
+    ...(interventions ? [`Rx/Interventions: ${interventions}`] : []),
+    ...(disposition ? [`Transport/Disposition: ${disposition}`] : [])
+  ];
+
+  // Send to Flask
   fetch("/generate-narrative", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ toggles: active })
+    body: JSON.stringify({ toggles: allNarrativeData })
   })
-  .then(response => response.json())
-  .then(data => {
-    document.getElementById("narrative").textContent = data.narrative;
-  });
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById("narrative").textContent = data.narrative;
+    });
 }
 
     function toggleTheme() {
