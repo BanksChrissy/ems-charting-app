@@ -178,21 +178,23 @@ function loadToggles() {
           btn.classList.add("toggle");
           btn.dataset.state = "none";
 
-          btn.onclick = () => {
-            if (btn.dataset.state === "none") {
-              btn.dataset.state = "yes";
-              btn.classList.remove("negative");
-              btn.classList.add("positive");
-            } else if (btn.dataset.state === "yes") {
-              btn.dataset.state = "no";
-              btn.classList.remove("positive");
-              btn.classList.add("negative");
-            } else {
-              btn.dataset.state = "none";
-              btn.classList.remove("positive", "negative");
-            }
-            updateToggleCount();
-          };
+btn.onclick = () => {
+  if (btn.dataset.state === "none") {
+    btn.dataset.state = "yes";
+    btn.classList.remove("negative");
+    btn.classList.add("positive");
+    btn.classList.add("active");
+  } else if (btn.dataset.state === "yes") {
+    btn.dataset.state = "no";
+    btn.classList.remove("positive");
+    btn.classList.add("negative");
+    btn.classList.add("active");
+  } else {
+    btn.dataset.state = "none";
+    btn.classList.remove("positive", "negative", "active");
+  }
+  updateToggleCount();
+};
 
           groupDiv.appendChild(btn);
         });
@@ -242,18 +244,6 @@ function loadToggles() {
     console.error("Error generating narrative:", error);
   }
 }
-
-
-  // Assemble all toggles and inputs into a single array
-  const allNarrativeData = [
-    ...(chief ? [`Chief Complaint: ${chief}`] : []),
-    ...(pmh ? [`History: PMH - ${pmh}`] : []),
-    ...(meds ? [`History: Medications - ${meds}`] : []),
-    ...(allergies ? [`History: Allergies - ${allergies}`] : []),
-    ...toggleSelections,
-    ...(interventions ? [`Rx/Interventions: ${interventions}`] : []),
-    ...(disposition ? [`Transport/Disposition: ${disposition}`] : [])
-  ];
 
   // Send to Flask
   fetch("/generate-narrative", {
