@@ -25,17 +25,12 @@ def get_negatives():
 def generate_narrative():
     toggles = request.json.get("toggles", [])
 
-    # Add user inputs to the narrative
     narrative_sections = {
-        "Chief Complaint": [data.get("chief", "")],
-        "History": [
-            f"PMH: {data.get('pmh', '')}",
-            f"Meds: {data.get('meds', '')}",
-            f"Allergies: {data.get('allergies', '')}"
-        ],
+        "Chief Complaint": [],
+        "History": [],
         "Assessment": [],
-        "Rx/Interventions": [data.get("interventions", "")],
-        "Transport/Disposition": [data.get("disposition", "")]
+        "Rx/Interventions": [],
+        "Transport/Disposition": []
     }
     
     for item in toggles:
@@ -59,9 +54,8 @@ def generate_narrative():
             narrative_sections["Assessment"].append(item)  # default
 
     # Format output
-def format_block(title, items):
-    cleaned = [item for item in items if item.strip()]
-    return f"{title}:\n- " + "\n- ".join(cleaned) if cleaned else ""
+    def format_block(title, items):
+        return f"{title}:\n- " + "\n- ".join(items) if items else ""
 
     final_narrative = "\n\n".join(
         format_block(title, items)
