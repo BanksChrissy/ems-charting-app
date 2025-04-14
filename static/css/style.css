@@ -332,12 +332,3 @@ textarea.chart-input {
   min-height: 120px;
   resize: vertical;
 }
-
-button.positive {
-  background-color: green;
-  color: white;
-}
-button.negative {
-  background-color: red;
-  color: white;
-}
