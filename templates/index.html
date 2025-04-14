@@ -245,18 +245,6 @@ btn.onclick = () => {
   }
 }
 
-  // Send to Flask
-  fetch("/generate-narrative", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ toggles: allNarrativeData })
-  })
-    .then(response => response.json())
-    .then(data => {
-      document.getElementById("narrative").textContent = data.narrative;
-    });
-}
-
     function toggleTheme() {
         document.body.classList.toggle("dark");
         const isDark = document.body.classList.contains("dark");
