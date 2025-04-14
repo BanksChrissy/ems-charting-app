@@ -332,3 +332,16 @@ textarea.chart-input {
   min-height: 120px;
   resize: vertical;
 }
+
+.toggle.positive {
+  background-color: #28a745;
+  color: white;
+  font-weight: bold;
+  border-color: #28a745;
+}
+.toggle.negative {
+  background-color: #dc3545;
+  color: white;
+  font-weight: bold;
+  border-color: #dc3545;
+}
