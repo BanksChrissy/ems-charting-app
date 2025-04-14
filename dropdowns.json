@@ -1,0 +1,93 @@
+{
+  "chief_complaints": [
+    // --- General Medical ---
+    "Abdominal Pain/Discomfort",
+    "Allergic Reaction/Anaphylaxis",
+    "Altered Mental Status/Confusion",
+    "Chest Pain/Pressure (Cardiac)",
+    "Dehydration/Fluid Loss",
+    "Diabetic Emergency (Hyperglycemia/Hypoglycemia)",
+    "Difficulty Breathing/Dyspnea",
+    "Dizziness/Lightheadedness",
+    "Fever/Chills/Suspected Infection",
+    "Headache/Migraine",
+    "Hypertensive Urgency/Emergency",
+    "Hypotension/Shock",
+    "Nausea/Vomiting/Diarrhea",
+    "Seizure Activity (Active/Post-Ictal)",
+    "Shortness of Breath (Non-Cardiac)",
+    "Syncope/Near-Syncope",
+    "Weakness/Fatigue (Generalized)",
+    "Weight Loss/Failure to Thrive (Geriatric)",
+
+    // --- Trauma/Injury ---
+    "Amputation (Traumatic)",
+    "Animal Bite/Attack",
+    "Assault (Physical/Sexual)",
+    "Blast Injury",
+    "Burn (Thermal/Chemical/Electrical)",
+    "Crush Injury",
+    "Fall (Height-Specific, e.g., >10ft)",
+    "Gunshot Wound (GSW)",
+    "Industrial Accident/Machinery Injury",
+    "Laceration/Avulsion",
+    "Motor Vehicle Collision (MVC - Driver/Passenger/Pedestrian)",
+    "Penetrating Trauma (Knife/Sharp Object)",
+    "Spinal Injury (Suspected)",
+    "Traumatic Brain Injury (TBI)",
+
+    // --- Behavioral/Psychiatric ---
+    "Agitation/Aggression",
+    "Anxiety/Panic Attack",
+    "Behavioral Crisis (Developmental Disability)",
+    "Overdose (Intentional/Suicidal)",
+    "Psychiatric Hold (5150/Baker Act Equivalent)",
+    "Psychotic Episode/Hallucinations",
+    "Suicidal Ideation/Attempt",
+    "Substance Withdrawal (Alcohol/Drugs)",
+
+    // --- Environmental ---
+    "Cold Exposure/Hypothermia",
+    "Drowning/Near-Drowning",
+    "Heat Exhaustion/Heat Stroke",
+    "Hazardous Materials Exposure",
+    "Lightning Strike",
+    "Smoke Inhalation",
+
+    // --- Pediatric-Specific ---
+    "Child Abuse/Neglect (Suspected)",
+    "Febrile Seizure",
+    "Pediatric Respiratory Distress (Croup/RSV)",
+    "Neonatal Distress (Newborn)",
+    "Non-Accidental Trauma (NAT)",
+
+    // --- Obstetric/Gynecological ---
+    "Ectopic Pregnancy (Suspected)",
+    "Labor/Delivery (Imminent)",
+    "Maternal Hemorrhage",
+    "Post-Partum Complication",
+    "Pregnancy-Related Hypertension (Pre-Eclampsia)",
+
+    // --- Specialized Complaints ---
+    "Dialysis Emergency (Line Complication)",
+    "Organ Transplant Complication",
+    "Ostomy/Feeding Tube Malfunction",
+    "Pacemaker/ICD Malfunction",
+    "Terminal Illness/End-of-Life Crisis",
+
+    // --- Toxicology/Overdose ---
+    "Alcohol Intoxication",
+    "Drug Overdose (Opioid/Non-Opioid)",
+    "Carbon Monoxide Poisoning",
+    "Chemical Exposure (Ingestion/Inhalation)",
+    "Envenomation (Snake/Spider)",
+    "Food Poisoning",
+
+    // --- SNHD/Regional Emphasis ---
+    "COVID-19/Suspected Infectious Disease",
+    "Dehydration (Heat-Related)",
+    "Homelessness-Related Illness",
+    "Psychostimulant Overdose (Methamphetamine)",
+    "Tourist Injury (e.g., Amusement Park/Recreational)"
+  ]
+}
