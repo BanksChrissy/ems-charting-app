@@ -139,7 +139,7 @@ document.querySelectorAll(".tab-button").forEach(button => {
 
       protocols.forEach(({ key, label }) => {
         const btn = document.createElement("button");
-        btn.classList.add("toggle");
+        btn.classList.add("toggle", "negative");
         btn.dataset.state = "no";
         btn.dataset.protocol = key;
         btn.textContent = label;
