@@ -217,9 +217,9 @@ function loadToggles() {
     }))
     .filter(t => t.state !== "none");
 
-  const formatted = toggleSelections.map(t => `${t.state === "yes" ? "[+]" : "[-]"} ${t.text}`);
-
-  const data = {
+  const formatted = toggleSelections.map(t => `${t.state === "yes" ? "Yes:" : "No:"} ${t.text}`);
+ 
+    const data = {
     chief: document.getElementById("chief-input").value.trim(),
     pmh: document.getElementById("pmh-input").value.trim(),
     meds: document.getElementById("meds-input").value.trim(),
