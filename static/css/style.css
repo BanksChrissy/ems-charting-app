@@ -334,14 +334,15 @@ textarea.chart-input {
 }
 
 .toggle.positive {
-  background-color: #28a745;
-  color: white;
+  background-color: #28a745 !important;
+  color: white !important;
   font-weight: bold;
-  border-color: #28a745;
+  border-color: #28a745 !important;
 }
+
 .toggle.negative {
-  background-color: #dc3545;
-  color: white;
+  background-color: #dc3545 !important;
+  color: white !important;
   font-weight: bold;
-  border-color: #dc3545;
+  border-color: #dc3545 !important;
 }
