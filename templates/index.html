@@ -139,10 +139,10 @@ function buildProtocolButtons() {
     btn.classList.add("toggle");
     btn.textContent = label;
     btn.dataset.protocol = key;
-    btn.onclick = () => {
-      btn.classList.toggle("active");
-      loadToggles();
-    };
+    btn.addEventListener("click", () => {
+    btn.classList.toggle("active");
+    loadToggles();
+  });
     container.appendChild(btn);
   });
 }
