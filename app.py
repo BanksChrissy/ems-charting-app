@@ -23,7 +23,25 @@ def get_negatives():
 
 @app.route("/generate-narrative", methods=["POST"])
 def generate_narrative():
-    toggles = request.json.get("toggles", [])
+    data = request.json
+    toggles = data.get("toggles", [])
+
+    # Combine structured inputs into toggle-like strings for classification
+    extra_inputs = []
+    if data.get("chief"):
+        extra_inputs.append(f"Chief Complaint: {data['chief']}")
+    if data.get("pmh"):
+        extra_inputs.append(f"PMH: {data['pmh']}")
+    if data.get("meds"):
+        extra_inputs.append(f"Medications: {data['meds']}")
+    if data.get("allergies"):
+        extra_inputs.append(f"Allergies: {data['allergies']}")
+    if data.get("interventions"):
+        extra_inputs.append(f"Intervention: {data['interventions']}")
+    if data.get("disposition"):
+        extra_inputs.append(f"Disposition: {data['disposition']}")
+
+    all_items = extra_inputs + toggles
 
     narrative_sections = {
         "Chief Complaint": [],
@@ -33,23 +51,21 @@ def generate_narrative():
         "Transport/Disposition": []
     }
 
-    # Smart keyword-based sorting
-    for item in toggles:
+    for item in all_items:
         lower_item = item.lower()
-        if "complaint" in lower_item or "cc" in lower_item:
+        if "chief complaint" in lower_item or "cc:" in lower_item:
             narrative_sections["Chief Complaint"].append(item)
         elif any(kw in lower_item for kw in ["history", "pmh", "allergy", "meds"]):
             narrative_sections["History"].append(item)
-        elif any(kw in lower_item for kw in ["vital", "exam", "assessment", "pain", "gcs", "symptom", "negative"]):
+        elif any(kw in lower_item for kw in ["vital", "exam", "assessment", "pain", "gcs", "symptom", "negative", "[+]", "[-]", "yes:", "no:"]):
             narrative_sections["Assessment"].append(item)
         elif any(kw in lower_item for kw in ["administered", "given", "treatment", "intervention", "response"]):
             narrative_sections["Rx/Interventions"].append(item)
         elif any(kw in lower_item for kw in ["transport", "disposition", "care", "hospital", "refused"]):
             narrative_sections["Transport/Disposition"].append(item)
         else:
-            narrative_sections["Assessment"].append(item)  # default
+            narrative_sections["Assessment"].append(item)  # fallback
 
-    # Format output
     def format_block(title, items):
         return f"{title}:\n- " + "\n- ".join(items) if items else ""
 
@@ -59,7 +75,7 @@ def generate_narrative():
     )
 
     return jsonify({"narrative": final_narrative})
-
+    
 import os
     
 if __name__ == "__main__":
