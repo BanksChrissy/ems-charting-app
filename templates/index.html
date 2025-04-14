@@ -161,8 +161,59 @@ function buildProtocolButtons() {
 function loadToggles() {
   const selectedButtons = document.querySelectorAll("#protocol-buttons .toggle.active");
   const selected = Array.from(selectedButtons).map(btn => btn.dataset.protocol);
-  const title = Array.from(selectedButtons).map(btn => btn.textContent).join(" + ");
-  // document.getElementById("protocol-title").textContent = title;
+
+  fetch("/pertinent-negatives", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ protocols: selected })
+  })
+    .then(response => response.json())
+    .then(data => {
+      const container = document.getElementById("toggles");
+      container.innerHTML = ""; // Clear previous toggles
+
+      Object.entries(data).forEach(([protocol, toggles]) => {
+        const groupTitle = document.createElement("h3");
+        groupTitle.textContent = protocol
+          .replace(/---/g, " - ")
+          .replace(/-/g, " ")
+          .replace(/\b\w/g, c => c.toUpperCase());
+        container.appendChild(groupTitle);
+
+        const groupDiv = document.createElement("div");
+        groupDiv.classList.add("toggle-container");
+
+        toggles.forEach(item => {
+          const btn = document.createElement("button");
+          btn.textContent = item;
+          btn.classList.add("toggle");
+          btn.dataset.state = "none";
+
+          btn.onclick = () => {
+            if (btn.dataset.state === "none") {
+              btn.dataset.state = "yes";
+              btn.classList.remove("negative");
+              btn.classList.add("positive");
+            } else if (btn.dataset.state === "yes") {
+              btn.dataset.state = "no";
+              btn.classList.remove("positive");
+              btn.classList.add("negative");
+            } else {
+              btn.dataset.state = "none";
+              btn.classList.remove("positive", "negative");
+            }
+            updateToggleCount();
+          };
+
+          groupDiv.appendChild(btn);
+        });
+
+        container.appendChild(groupDiv);
+      });
+
+      updateToggleCount();
+    });
+}
 
   fetch("/pertinent-negatives", {
     method: "POST",
@@ -209,10 +260,38 @@ function loadToggles() {
         document.getElementById("toggle-count").textContent = active + " selected";
     }
 
-    function submitToggles() {
-  // Gather toggle selections from Assessment tab
-  const toggleSelections = Array.from(document.querySelectorAll("#toggles .toggle.active"))
-    .map(btn => btn.textContent);
+    async function submitToggles() {
+  const toggleSelections = Array.from(document.querySelectorAll("#toggles .toggle"))
+    .map(btn => ({
+      text: btn.textContent,
+      state: btn.dataset.state
+    }))
+    .filter(t => t.state !== "none");
+
+  const formatted = toggleSelections.map(t => `${t.state === "yes" ? "[+]" : "[-]"} ${t.text}`);
+
+  const data = {
+    chief: document.getElementById("chief-input").value.trim(),
+    pmh: document.getElementById("pmh-input").value.trim(),
+    meds: document.getElementById("meds-input").value.trim(),
+    allergies: document.getElementById("allergies-input").value.trim(),
+    interventions: document.getElementById("interventions-input").value.trim(),
+    disposition: document.getElementById("disposition-input").value.trim(),
+    toggles: formatted
+  };
+
+  try {
+    const response = await fetch("/generate-narrative", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+    const result = await response.json();
+    document.getElementById("narrative").textContent = result.narrative;
+  } catch (error) {
+    console.error("Error generating narrative:", error);
+  }
+}
 
   // Gather CHART inputs from other tabs
   const chief = document.getElementById("chief-input")?.value.trim();
