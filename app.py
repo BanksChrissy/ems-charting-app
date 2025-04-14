@@ -32,10 +32,6 @@ def generate_narrative():
         "Rx/Interventions": [],
         "Transport/Disposition": []
     }
-    
-    for item in toggles:
-        label = f"Yes: {item['text']}" if item['state'] == "yes" else f"No: {item['text']}"
-        narrative_sections["Assessment"].append(label)
 
     # Smart keyword-based sorting
     for item in toggles:
