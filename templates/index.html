@@ -215,45 +215,6 @@ function loadToggles() {
     });
 }
 
-  fetch("/pertinent-negatives", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ protocols: selected })
-  })
-    .then(response => response.json())
-    .then(data => {
-      const container = document.getElementById("toggles");
-      container.innerHTML = ""; // Clear previous toggles
-
-      Object.entries(data).forEach(([protocol, toggles]) => {
-        const groupTitle = document.createElement("h3");
-        groupTitle.textContent = protocol
-          .replace(/---/g, " - ")
-          .replace(/-/g, " ")
-          .replace(/\b\w/g, c => c.toUpperCase());
-        container.appendChild(groupTitle);
-
-        const groupDiv = document.createElement("div");
-        groupDiv.classList.add("toggle-container");
-
-        toggles.forEach(item => {
-          const btn = document.createElement("button");
-          btn.textContent = item;
-          btn.classList.add("toggle");
-          btn.onclick = () => {
-            btn.classList.toggle("active");
-            updateToggleCount();
-          };
-          groupDiv.appendChild(btn);
-        });
-
-        container.appendChild(groupDiv);
-      });
-
-      updateToggleCount();
-    });
-}
-
        
     function updateToggleCount() {
         const active = document.querySelectorAll(".toggle.active").length;
@@ -293,13 +254,6 @@ function loadToggles() {
   }
 }
 
-  // Gather CHART inputs from other tabs
-  const chief = document.getElementById("chief-input")?.value.trim();
-  const pmh = document.getElementById("pmh-input")?.value.trim();
-  const meds = document.getElementById("meds-input")?.value.trim();
-  const allergies = document.getElementById("allergies-input")?.value.trim();
-  const interventions = document.getElementById("interventions-input")?.value.trim();
-  const disposition = document.getElementById("disposition-input")?.value.trim();
 
   // Assemble all toggles and inputs into a single array
   const allNarrativeData = [
